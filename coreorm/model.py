@@ -3,6 +3,7 @@
 from coreorm.fields import FieldType,ForeignType,StringType,IntType
 from coreorm.manager import Manager
 from coreorm.globalx import CORE_MODEL_NAME
+from coreorm.sql.manager import instance_save,instance_delete
 
 class ModelMeta(type):
     
@@ -62,12 +63,12 @@ class CoreModel(object):
         return object.__setattr__(self, name,value)
     
     @property
-    def update_instance(self):
+    def modify(self):
         return self.id
     
     def save(self):
-        pass
+        return instance_save(self)
     
     def delete(self):
-        pass
+        return instance_delete(self)
     

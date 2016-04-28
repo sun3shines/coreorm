@@ -13,7 +13,6 @@ class FieldType(object):
         
     def __set__(self,instance,value):
         print '%s __set__ val: %s' % (self.TypeStr,str(value))
-
         instance.__dict__[self.name] = value
 
 class IntType(FieldType):

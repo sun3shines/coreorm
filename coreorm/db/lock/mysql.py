@@ -1,8 +1,8 @@
 
 import threading
 
-from cloudweb.db.table.mysql import dbConn
-from cloudweb.platform.globalx.static import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,MYSQL_PASSWD
+from coreorm.db.mysql_db import dbConn
+from coreorm.globalx import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,MYSQL_PASSWD
 
 class db(dbConn):
     def __init__(self,*args, **kwargs):
