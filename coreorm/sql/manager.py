@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from coreorm.core.fields import ForeignType
 from coreorm.sql.operation import db_update,db_insert,db_delete, db_select
 
 def instance_save(obj):
@@ -8,12 +9,27 @@ def instance_save(obj):
     if obj.modify:
         condition_kv = {'id':obj.id}
         kv = {}
-        for k in obj.__updatefields__:
-            kv.update({k:getattr(obj,k)})
+        for k in obj.__d_updatefields__:
+            
+            if obj.__relatedfields__.has_key(k):
+                # new_k = obj.__relatedfields__[k]
+                # kv.update({new_k:getattr(obj,new_k)})
+                kv.update({k:obj.__dict__[k]})
+            else:
+                kv.update({k:getattr(obj,k)})
+                
         return db_update(kv, table, condition_kv)
     else:
-        attrs = obj.__insertfields__
-        vals = [getattr(obj,attr) for attr in obj.__insertfields__]
+        attrs = obj.__d_insertfields__
+        vals = []
+        for attr in attrs:
+            if obj.__relatedfields__.has_key(attr):
+                # new_k = obj.__relatedfields__[attr]
+                # vals.append(getattr(obj,new_k))
+                vals.append(obj.__dict__[attr])
+            else:
+                vals.append(getattr(obj, attr))
+                
         return db_insert(attrs, vals, table)
     
 def instance_delete(obj):
@@ -24,11 +40,11 @@ def instance_delete(obj):
     
 def objects_get(cls,condition_kv):
     for k in condition_kv:
-        if k not in cls.__tablefields__:
+        if k not in cls.__m_tablefields__:
             raise KeyError
         
     table = cls.__tablename__
-    attrs = cls.__tablefields__
+    attrs = cls.__d_tablefields__
     datas = db_select(attrs, table, condition_kv)
     
     if not datas:
@@ -57,9 +73,9 @@ def objects_orderby():
 
 def db2obj(cls,data):
     obj = cls()
-    if len(cls.__tablefields__) != len(data):
+    if len(cls.__d_tablefields__) != len(data):
         raise RuntimeError
     
-    for i,attr in enumerate(cls.__tablefields__):
-        setattr(obj, attr, data[i])
+    for i,attr in enumerate(cls.__d_tablefields__):
+        obj.__dict__[attr]= data[i]
     return obj

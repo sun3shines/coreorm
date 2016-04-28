@@ -50,11 +50,14 @@ class StringType(FieldType):
         return FIELD_TYPE_STRING
             
 class ForeignType(FieldType):
-    def __init__(self,fkcls,name=None):
+    def __init__(self,fkcls,name=None,primary=False,notnull=False):
         
         self.fkcls = fkcls
         self.name = name
         self.fkid_label = '_'.join([name,'id']) if name else None
+        
+        self.primary = primary
+        self.notnull = notnull
         
     def __get__(self,instance,cls):
         print 'ForeignType __get__'    
@@ -69,10 +72,9 @@ class ForeignType(FieldType):
         
     @property
     def as_sql(self):
-        return '%s %s%s%s%s' % (self.fkid_label,self.basetype,
+        return '%s %s%s%s' % (self.fkid_label,self.basetype,
                          ' NOT NULL' if self.notnull else '',
-                         ' PRIMARY KEY' if self.primary else '',
-                         ' AUTO_INCREMENT' if self.auto_increment else '')
+                         ' PRIMARY KEY' if self.primary else '')
     @property
     def basetype(self):
         return FIELD_TYPE_INT
