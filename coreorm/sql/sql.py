@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from coreorm.globalx import GLOBAL_DB_CONN
-
 def genAttrsStr(attrs):
     return ' , '.join(attrs)
 

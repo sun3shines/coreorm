@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
-from coreorm.db.lock.mysql import getdb
 
 CORE_MODEL_NAME = 'CoreModel'
 
 INNER_INSERT_FIELDS = ''
 INNER_UPDATE_FIELDS = ''
 
+MYSQL_DATABASE = 'orm'
 MYSQL_HOST = '192.168.36.3'
 MYSQL_PORT = 3306
 MYSQL_USER = 'root'
 MYSQL_PASSWD = '111111'
 MYSQL_CONNECTION_TIMEOUT = 24*60*60
 
-GLOBAL_DB_CONN = getdb()
+FIELD_TYPE_STRING = 'varchar(255)'
+FIELD_TYPE_INT = 'bigint'
+FIELD_TYPE_TIME = ''
+

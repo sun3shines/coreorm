@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from coreorm.sql.sql import genAttrsStr,genConditionStr,genUpdateValStr,genValsStr
-from coreorm.globalx import GLOBAL_DB_CONN
+from coreorm.globalx.variable import GLOBAL_DB_CONN
 
 def db_update(kv,table,condition_kv):
 

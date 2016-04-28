@@ -2,7 +2,8 @@
 import threading
 
 from coreorm.db.mysql_db import dbConn
-from coreorm.globalx import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,MYSQL_PASSWD
+from coreorm.globalx.static import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,\
+    MYSQL_PASSWD,MYSQL_DATABASE
 
 class db(dbConn):
     def __init__(self,*args, **kwargs):
@@ -33,5 +34,5 @@ def getlock(conn):
       
 def getdb():
 
-    return db(MYSQL_HOST,MYSQL_USER,MYSQL_PASSWD,MYSQL_PORT,'cloudweb')
+    return db(MYSQL_HOST,MYSQL_USER,MYSQL_PASSWD,MYSQL_PORT,MYSQL_DATABASE)
 

@@ -2,8 +2,8 @@
 
 import time
 import MySQLdb
-from coreorm.globalx import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,\
-    MYSQL_PASSWD,MYSQL_CONNECTION_TIMEOUT
+from coreorm.globalx.static import MYSQL_HOST,MYSQL_PORT,MYSQL_USER,\
+    MYSQL_PASSWD,MYSQL_CONNECTION_TIMEOUT,MYSQL_DATABASE
     
 class dbConn(object):
 
@@ -57,4 +57,4 @@ class dbConn(object):
         self.connection.commit()
 
 def getDb():
-    return dbConn(MYSQL_HOST,MYSQL_USER,MYSQL_PASSWD,MYSQL_PORT,'cloudweb')
+    return dbConn(MYSQL_HOST,MYSQL_USER,MYSQL_PASSWD,MYSQL_PORT,MYSQL_DATABASE)

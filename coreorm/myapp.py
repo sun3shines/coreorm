@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from coreorm.model import CoreModel
-from coreorm.fields import StringType,ForeignType,IntType
-from coreorm.manager import Manager
+from coreorm.core.model import CoreModel
+from coreorm.core.fields import StringType,ForeignType,IntType
+from coreorm.core.manager import Manager
 
 class Country(CoreModel):
     name = StringType()
@@ -36,6 +36,7 @@ def test():
     # pp.objects.get(id=1)
 #    Person.objects.get(id=1)
     import pdb;pdb.set_trace()
+    print Country.as_sql()
     pass
 #    cc.name = 'china'
 #    print cc.name 
