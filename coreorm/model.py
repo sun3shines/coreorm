@@ -2,12 +2,13 @@
 
 from coreorm.fields import FieldType,ForeignType,StringType,IntType
 from coreorm.manager import Manager
+from coreorm.globalx import CORE_MODEL_NAME
 
 class ModelMeta(type):
     
     def __new__(cls,name,bases,attrs):
         
-        if 'MyModle' == name:
+        if CORE_MODEL_NAME == name:
             return type.__new__(cls,name,bases,attrs)
         tablefields = []
         tablename = name.lower()
@@ -35,7 +36,8 @@ class ModelMeta(type):
         attrs['__tablefields__'] = tablefields
         attrs['__tablename__'] = tablename
         attrs['__primarykey__'] = primarykey
-        
+        attrs['__insertfields__'] = []
+        attrs['__updatefields__'] = []
         classobj = super(ModelMeta,cls).__new__(cls,name,bases,attrs)
         setattr(classobj, 'objects', Manager())
         
@@ -49,6 +51,20 @@ class CoreModel(object):
                 raise TypeError('%s field not exists'% (key))
             setattr(self,key,val)
 
+    def __setattr__(self, name,value):
+        if name in self.__tablefields__: 
+            if not self.update_instance:
+                if name not in self.__insertfields__:
+                    self.__insertfields__.append(name)
+            else:
+                if name not in self.__updatefields__:
+                    self.__updatefields__.append(name)
+        return object.__setattr__(self, name,value)
+    
+    @property
+    def update_instance(self):
+        return self.id
+    
     def save(self):
         pass
     

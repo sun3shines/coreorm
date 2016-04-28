@@ -12,9 +12,9 @@ class Manager(object):
         print 'Manager __get__' 
         # return instance.__dict__.get(self.name,None)
         return self
-    
-    def get(self,*args,**kwargs):
-        print 'Manager get'    
-        
+            
     def __set__(self,instance,value):
         raise NotImplementedError
+
+    def get(self,*args,**kwargs):
+        print 'Manager get'    

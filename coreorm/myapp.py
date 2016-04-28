@@ -23,17 +23,18 @@ def test():
 #    print pp.name
       
     cc = Country(name='china')
-    ci = City(name='handan',country=cc)
+    cc.name = 'abc'
+#    ci = City(name='handan',country=cc)
     # ci.country = cc
     
-    pp = Person()
-    pp.name='she'
-    pp.city = ci
+#    pp = Person()
+#    pp.name='she'
+#    pp.city = ci
     
-    print pp.city.country.name
+#    print pp.city.country.name
     
-    pp.objects.get(id=1)
-    Person.objects.get(id=1)
+    # pp.objects.get(id=1)
+#    Person.objects.get(id=1)
     import pdb;pdb.set_trace()
     pass
 #    cc.name = 'china'
