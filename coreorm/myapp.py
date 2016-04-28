@@ -5,6 +5,7 @@ from coreorm.core.fields import StringType,ForeignType,IntType
 from coreorm.core.manager import Manager
 
 class Country(CoreModel):
+    id = IntType(primary=True,notnull=True,auto_increment=True)
     name = StringType()
     
 class City(CoreModel):
@@ -21,9 +22,16 @@ def test():
 #    pp = Person()
 #    pp.name = 'she'
 #    print pp.name
-      
+    print Country.as_sql() 
     cc = Country(name='china')
-    cc.name = 'abc'
+    cc.save()
+    cobj = Country.objects.get(name='china')
+    print cobj.id
+    cobj.name = 'USA'
+    cobj.save()
+#    cobj.delete()
+#    cobj = Country.objects.get(name='china')
+#    print cobj.id
 #    ci = City(name='handan',country=cc)
     # ci.country = cc
     

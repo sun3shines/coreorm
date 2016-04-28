@@ -34,6 +34,7 @@ class ModelMeta(type):
             tablefields.append(key)
             mappings.update({key:val})
             
+        idval = attrs.get('id')
         if 'id' not in tablefields:
             idval = IntType(name='id',notnull=True,auto_increment=True)
             d['id'] = idval
@@ -42,6 +43,7 @@ class ModelMeta(type):
             
         if not primarykey:
             primarykey = 'id'
+            idval.primary = True
         # 通过obj.attr 或者getattr(obj,attr) 的方式只能获取到值，而不是对象
         # 后续的内容要求我们获取到对象了。 
         d['__mappings__'] = mappings    
