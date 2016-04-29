@@ -47,3 +47,12 @@
     print Country.as_sql()
     print City.as_sql()
     print Person.as_sql()
+
+关于设计 
+
+   db链接层
+   sql 基础操作 insert/delete/update/select
+   sql 语法层 order_by/where/foregin_key
+   sql_manager
+   model_manager field
+   model 层
