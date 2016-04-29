@@ -1,67 +1,49 @@
-# -*- coding: utf-8 -*-
+   
+支持列表操作
 
-from coreorm.myapp import Country,City,Person
-
-def obj_create():
+    创建 
+    o = Country(name='china')
+    o.save()
     
-    cc = Country(name='china')
-    cc.save()
+    修改
     cobj = Country.objects.get(name='china')
-    print cobj.id
-    
-def obj_update():
-    
-    cobj = Country.objects.get(name='china')
-    print cobj.id
     cobj.name = 'USA'
     cobj.save()
-
-def obj_delete():
     
+    删除
     cobj = Country.objects.get(name='USA')
-    print cobj.id
     cobj.delete()
-
-def obj_get():
     
+    获取get
     cobj = Country.objects.get(name='CN')
     print cobj.id
+
+    获取all
     print Country.objects.all()
+
+    获取values
     print Country.objects.values()
+
+    获取filter
     print Country.objects.filter()
     
-def foreignkey_save():
-
+    外键创建
     countryobj = Country.objects.get(name='CN')
-    ci = City(name='HD',country=countryobj)
-    ci.save()
+    cityobj = City(name='HD',country=countryobj)
+    cityobj.save()
 
     
-def foreignkey_get():
-    
+    外键属性
     cityobj = City.objects.get(name='HD')
     print cityobj.country.id
     
-def foreignkey_update():
-    
+    外键修改
     countryobj = Country.objects.get(name='USA')
     cityobj = City.objects.get(name='HD')
     cityobj.country = countryobj
     cityobj.save()
     
-def sql():
+    生成create table sql语句
     print Country.as_sql()
     print City.as_sql()
     print Person.as_sql()
-
-if __name__ == '__main__':
-    
-    sql()
-    obj_create()
-    obj_update()
-    obj_delete()
-    obj_get()
-    foreignkey_save()
-    foreignkey_get()
-    foreignkey_update()
-    

@@ -24,3 +24,15 @@ class Manager(object):
         print 'Manager get'
         return objects_get(self.cls,kwargs)
     
+    def filter(self,*args,**kwargs):
+        print 'Manager filter'
+        return objects_filter(self.cls,kwargs)
+    
+    def values(self,*args,**kwargs):
+        print 'Manager values'
+        return objects_values(self.cls)
+    
+    def all(self,*args,**kwargs):
+        print 'Manager all'
+        return objects_all(self.cls)
+    
