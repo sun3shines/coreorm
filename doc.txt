@@ -50,6 +50,8 @@
 
 关于设计 
 
+   支持 stringtype，inttype，foreigntype等field
+   使用元类，描述符编程,做好field和db column和存储对象的映射。
    db链接层
    sql 基础操作 insert/delete/update/select
    sql 语法层 order_by/where/foregin_key
